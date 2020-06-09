@@ -17,7 +17,8 @@ class PeriksaController extends Controller
      public function edit($id)
      {
           $periksa = ModelPeriksa::where('id','=',$id)->get();
-          return view('perawat/perawat', compact('periksa'));
+          //return view('perawat/perawat', compact('periksa'));
+          return response()->json($periksa);
      }
 
      public function update(Request $request, $id)
@@ -36,6 +37,6 @@ class PeriksaController extends Controller
         $periksa->status = $request->status;
         $periksa->save();
 
-        return redirect()->route('perawat.update');
+        return redirect()->route('perawat.index');
     }
 }

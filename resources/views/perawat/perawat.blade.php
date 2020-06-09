@@ -26,8 +26,8 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>No. Antrian</th>
-                        <th>Aksi</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,22 +35,22 @@
                     <tr>
                         <td>{{ $p->nomor_periksa }}</td>
                         <td>
-                              @if ($p->status == 1)
-                                  <button class=" btn btn-sm btn-primary">
-                                      Diperiksa
+                              @if ($p->status == "Menunggu")
+                                  <button class="btn btn-sm btn-danger">
+                                      Menunggu
                                   </button>
                               @else
-                                  <button class=" btn btn-sm btn-danger">
-                                      Menunggu
+                                  <button class="btn btn-sm btn-success">
+                                      Diperiksa
                                   </button>
                               @endif
                         </td>
                         
                         <td>
-                          <button class=" btn btn-sm btn-success" style="color:white;">
+                          <button class="btn btn-sm btn-success" style="color:white;">
                             <span class="fa fa-arrow-up"></span>
                           </button>
-                          <button class=" btn btn-sm btn-success" style="color:white;">
+                          <button class="btn btn-sm btn-success" style="color:white;">
                             <span class="fa fa-arrow-down"></span>
                           </button>
                           <button type="button" class="edit btn-icon" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p->id}}">
@@ -76,7 +76,6 @@
                   <div class="modal-header">
                       <div class="card-header card-header-primary text-center">
                           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                              <i class="material-icons">clear</i></button>
                           <h4 class="card-title">Antrian</h4>
                       </div>
                   </div>
@@ -123,8 +122,8 @@
                                   </div>
                                   <div class="col-8" id="status">
                                       <select class="form-control" name="status">
-                                          <option value="1">Diperiksa</option>
-                                          <option value="0">Menunggu</option>
+                                          <option value="Diperiksa">Diperiksa</option>
+                                          <option value="Menunggu">Menunggu</option>
                                       </select>
                                   </div>
                               </div>
@@ -163,6 +162,7 @@
                     dataType    : 'html',
                     success     : function(data){
                         var servers = $.parseJSON(data);
+                        console.log(servers);
 
                         $.each(servers, function(index, value){
                             var nomor_periksa = value.nomor_periksa;
@@ -182,8 +182,10 @@
 
                 });
 
-                var action = '{!!url('perawat')!!}/'+id;
-                console.log(id);
+                var action = '{{ route("perawat.update", ":id") }}';
+                action = action.replace(':id', id);
+                // console.log(id);
+                // console.log(action);
                 $('#form').attr('action',action);
             })
         })

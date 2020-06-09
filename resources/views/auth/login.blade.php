@@ -58,10 +58,6 @@
 		</div>
 		<div class="col-12 col-md-10 d-none d-xl-block">
 		<nav class="site-navigation position-relative text-right" role="navigation">
-
-			<ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-			<li><a href="/login" class="nav-link">LOGIN</a></li>
-			</ul>
 		</nav>
 		</div>
 
@@ -113,24 +109,10 @@
                                     </span>
                                 @endif
 						</div>
-						<div class="flex-sb-m w-full p-b-30">
-							<div class="contact100-form-checkbox">
-							<input class="input-checkbox100" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
-								<label class="label-checkbox100" for="ckb1">
-									Remember me
-								</label>
-							</div>
-
-							<div>
-								<a href="{{ route('password.request') }}" class="txt1">
-									Forgot Password?
-								</a>
-							</div>
-						</div>
-
+						
 						<div class="container-login100-form-btn">
 							<button class="login100-form-btn">
-								Login
+								Masuk
 							</button>
 						</div>
                     </form>

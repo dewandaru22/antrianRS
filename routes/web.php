@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/perawat', 'PeriksaController@index');
+Route::get('/perawat', 'PeriksaController@index')->name('perawat.index');
 
 Route::get('/perawat/{id}', 'PeriksaController@edit');
 Route::put('/perawat/{id}', 'PeriksaController@update')->name('perawat.update');
