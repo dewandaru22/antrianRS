@@ -40,7 +40,7 @@
                                       Menunggu
                                   </button>
                               @else
-                                  <button class="btn btn-sm btn-success">
+                                  <button class="edit btn btn-sm btn-primary" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p->id}}">
                                       Diperiksa
                                   </button>
                               @endif

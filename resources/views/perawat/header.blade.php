@@ -21,7 +21,7 @@
           <a href="{{ url('/landing') }}" class="nav-link btn-login; dropdown-item"
                             onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-          <i class="fas fa-sign-out-alt"></i>Logout 
+          <i class="fas fa-sign-out-alt"></i>Keluar 
           </a>
           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}
