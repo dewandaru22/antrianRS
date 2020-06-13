@@ -109,6 +109,14 @@
                                     </span>
                                 @endif
 						</div>
+
+						<div class="flex-sb-m w-full p-b-30">
+							<div>
+								<a href="{{ route('password.request') }}" class="txt1">
+									Lupa kata sandi?
+								</a>
+							</div>
+						</div>
 						
 						<div class="container-login100-form-btn">
 							<button class="login100-form-btn">
