@@ -74,7 +74,7 @@
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url('/template/images/rs-islam-logo.png'); background-size: auto;">
 					<span class="login100-form-title-1">
-						LOGIN
+						Masuk
 					</span>
 				</div>
 
