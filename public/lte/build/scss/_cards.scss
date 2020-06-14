@@ -124,7 +124,7 @@ html.maximized-card {
 .card-header {
   position: relative;
   background-color: transparent;
-  border-bottom: 1px solid $card-border-color;
+  // border-bottom: 1px solid $card-border-color;
 
   @if $enable-rounded {
     @include border-top-radius($border-radius);

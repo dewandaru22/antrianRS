@@ -18,10 +18,13 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-header">{{DB::table('users')->where('id','=', Auth::user()->id)->value('name')}}</span>
           <div class="dropdown-divider"></div>
+          <a href="{{ url('/changePassword') }}" class="dropdown-item">
+            <i class="fas fa-edit"></i> Ubah Kata Sandi
+          </a>
           <a href="{{ url('/landing') }}" class="nav-link btn-login; dropdown-item"
                             onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-          <i class="fas fa-sign-out-alt"></i>Keluar 
+          <i class="fas fa-sign-out-alt"></i> Keluar 
           </a>
           <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                       {{ csrf_field() }}

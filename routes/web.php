@@ -42,3 +42,9 @@ Route::get('/landing', function () {
 Route::get('/antrian', function () {
     return view('antrian');
 });
+
+Route::get('/changePassword', function(){
+    return view('perawat/changePassword');
+});
+
+Route::post('/change-password', 'ChangePasswordController@store')->name('change.password');

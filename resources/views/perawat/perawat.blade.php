@@ -75,8 +75,7 @@
               <div class="card card-signup card-plain">
                   <div class="modal-header">
                       <div class="card-header card-header-primary text-center">
-                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                          <h4 class="card-title">Antrian</h4>
+                          <h4>Ubah Status</h4>
                       </div>
                   </div>
                   <form method="POST" action="" id="form">
@@ -86,34 +85,10 @@
                           <div class="card-body">
                               <div class="row">
                                   <div class="col-4">
-                                      <h6 class="text-dark font-weight-light">Nomor Periksa</h6>
+                                      <h6 class="text-dark font-weight-light">Nomor Antrian</h6>
                                   </div>
                                   <div class="col-8">
                                       <h6 class="text-dark font-weight-bold" id="nomor_periksa">{{ $p->nomor_periksa }}</h6>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-4">
-                                      <h6 class="text-dark font-weight-light">ID Pasien</h6>
-                                  </div>
-                                  <div class="col-8">
-                                      <h6 class="text-dark font-weight-bold" id="pasien_id">{{ $p->pasien_id }}</h6>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-4">
-                                      <h6 class="text-dark font-weight-light">ID Dokter</h6>
-                                  </div>
-                                  <div class="col-8">
-                                          <h6 class="text-dark font-weight-bold" id="dokter_id">{{ $p->dokter_id }}</h6>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-4">
-                                      <h6 class="text-dark font-weight-light">Tanggal</h6>
-                                  </div>
-                                  <div class="col-8">
-                                          <h6 class="text-dark font-weight-bold" id="tanggal">{{ $p->tanggal }}</h6>
                                   </div>
                               </div>
                               <div class="row">
