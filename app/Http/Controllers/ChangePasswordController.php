@@ -45,7 +45,7 @@ class ChangePasswordController extends Controller
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return redirect('changePassword')->withMessage('Berhasil Mengubah Password');
+        return redirect()->back()->with('success', 'Kata Sandi berhasil di ubah!');
         
     }
 }

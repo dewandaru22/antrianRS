@@ -30,6 +30,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Main Sidebar Container -->
 @include('perawat/sidebar')
+
+@include('sweetalert::alert')
  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -72,5 +74,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- DataTables -->
 <script src="{{ asset('/lte/plugins/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('/lte/plugins/datatables/dataTables.bootstrap4.js') }}"></script>
+
+<script src="{{ asset('/vendor/sweetalert/sweetalert.all.js') }}"></script>
+
+<script src="sweetalert2.all.min.js"></script>
+<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 </body>
 </html>
