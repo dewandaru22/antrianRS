@@ -30,8 +30,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Main Sidebar Container -->
 @include('perawat/sidebar')
-
-@include('sweetalert::alert')
  
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -80,5 +78,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="sweetalert2.all.min.js"></script>
 <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+<link rel="stylesheet" href="{{asset('toastr.min.css')}}">
+<script src=" {{asset('toastr.min.js')}}"></script>
+
+<script>
+    @if(Session::has('success'))
+    toastr.success("{{ Session::get('success') }}")
+    @endif
+</script>
+
 </body>
 </html>

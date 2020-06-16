@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\ModelPeriksa;
+use Session;
 
 class PeriksaController extends Controller
 {
@@ -36,6 +37,8 @@ class PeriksaController extends Controller
         $periksa = ModelPeriksa::where('id',$id)->first();
         $periksa->status = $request->status;
         $periksa->save();
+
+        Session::flash('success','Status Berhasil di Ubah!');
 
         return redirect()->route('perawat.index');
     }

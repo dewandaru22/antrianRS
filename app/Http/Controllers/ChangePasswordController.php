@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use Session;
 
 class ChangePasswordController extends Controller
 {
@@ -45,7 +46,8 @@ class ChangePasswordController extends Controller
    
         User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return redirect()->back()->with('success', 'Kata Sandi berhasil di ubah!');
+        Session::flash('success','Kata Sandi Berhasil di Ubah!');
+        return redirect()->back();
         
     }
 }
