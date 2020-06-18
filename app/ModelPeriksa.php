@@ -8,11 +8,13 @@ class ModelPeriksa extends Model
 {
     protected $table = "periksa";
 
-    // public function pasien(){
-    // 	return $this->belongsTo('App\ModelPasien', 'id');
-    // }
+    public function pasien()
+    {
+        return $this->belongsTo('App\Pasien', 'pasien_id');
+    }
 
-    // public function dokter(){
-    // 	return $this->belongsTo('App\ModelDokter', 'id');
-    // }
+    public function dokter()
+    {
+        return $this->belongsTo('App\Dokter', 'dokter_id');
+    }
 }
