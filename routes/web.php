@@ -48,3 +48,7 @@ Route::get('/changePassword', function(){
 });
 
 Route::post('/change-password', 'ChangePasswordController@store')->name('change.password');
+
+Route::get('/naikAntrian/{id}', 'AntrianController@naik')->name('naik.antrian');
+
+Route::get('/turunAntrian/{id}', 'AntrianController@turun')->name('turun.antrian');

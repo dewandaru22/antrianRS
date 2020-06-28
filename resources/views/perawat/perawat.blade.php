@@ -47,12 +47,12 @@
                         </td>
                         
                         <td>
-                            <button class="btn btn-sm btn-success" style="color:white;">
+                            <a href="{{route('naik.antrian',$p->id)}}" class="btn btn-sm btn-success" style="color:white;">
                                 <span class="fa fa-arrow-up"></span>
-                            </button>
-                            <button class="btn btn-sm btn-success" style="color:white;">
+                            </a>
+                            <a href="{{route('turun.antrian',$p->id)}}" class="btn btn-sm btn-success" style="color:white;">
                                 <span class="fa fa-arrow-down"></span>
-                            </button>
+                            </a>
                             <!-- <button type="button" class="edit btn-icon" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p->id}}">
                                 <i class="material-icons" style="color: #2B82BC;font-size:1.1rem;cursor: pointer;">edit</i>
                             </button> -->

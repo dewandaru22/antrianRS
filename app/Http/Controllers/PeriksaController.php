@@ -17,13 +17,20 @@ class PeriksaController extends Controller
 
      public function edit($id)
      {
-          $periksa = ModelPeriksa::where('id','=',$id)->get();
+          //$periksa = ModelPeriksa::where('id','=',$id)->get();
           //return view('perawat/perawat', compact('periksa'));
-          return response()->json($periksa);
+          //return response()->json($periksa);
      }
 
      public function update(Request $request, $id)
     {
+        $periksa = ModelPeriksa::where('id',$id)->first();
+        $periksa->status = $request->status;
+        $periksa->save();
+
+        Session::flash('success','Status Berhasil di Ubah!');
+
+        return redirect()->route('perawat.index');
      
         // $periksa = ModelPeriksa::where('id',$id)->first();
         // $periksa->nomor_periksa = $request->nomor_periksa;
@@ -34,12 +41,5 @@ class PeriksaController extends Controller
         // $periksa->save();
         // return redirect('/perawat');
 
-        $periksa = ModelPeriksa::where('id',$id)->first();
-        $periksa->status = $request->status;
-        $periksa->save();
-
-        Session::flash('success','Status Berhasil di Ubah!');
-
-        return redirect()->route('perawat.index');
     }
 }
