@@ -17,9 +17,9 @@ class PeriksaController extends Controller
 
      public function edit($id)
      {
-          //$periksa = ModelPeriksa::where('id','=',$id)->get();
+          $periksa = ModelPeriksa::where('id','=',$id)->get();
           //return view('perawat/perawat', compact('periksa'));
-          //return response()->json($periksa);
+          return response()->json($periksa);
      }
 
      public function update(Request $request, $id)
