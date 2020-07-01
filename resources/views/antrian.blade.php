@@ -22,16 +22,16 @@
                 </th>
             </tr>
             <tr>
-                <th style="background-color: #93B874">D-001</th>
-                <th style="background-color: #93B874">D-002</th>
+                <th style="background-color: #93B874">{{$antrian->heads->nomor_periksa}}</th>
+                <th style="background-color: #93B874">{{$data->nomor_periksa}}</th>
             </tr>
             <tr>
-                <td style="background-color: #184d26">Pasien Dilewati</td>
+                <td style="background-color: #184d26">Pasien Menunggu</td>
                 <td style="background-color: #184d26">Pasien Terakhir</td>
             </tr>
             <tr>
-                <th style="background-color: #93B874">-</th>
-                <th style="background-color: #93B874">D-010</th>
+                <th style="background-color: #93B874">{{$count}}</th>
+                <th style="background-color: #93B874">{{$antrian->tails->nomor_periksa}}</th>
             </tr>
         </tbody>
         <tfoot>

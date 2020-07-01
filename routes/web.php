@@ -39,9 +39,9 @@ Route::get('/landing', function () {
     return view('base/home_page');
 });
 
-Route::get('/antrian', function () {
-    return view('antrian');
-});
+Route::get('/infoantrian', 'PeriksaController@infoAntrian')->name('antrian');
+
+Route::get('/websignage', 'PeriksaController@signage')->name('websignage');
 
 Route::get('/changePassword', function(){
     return view('perawat/changePassword');
@@ -52,3 +52,5 @@ Route::post('/change-password', 'ChangePasswordController@store')->name('change.
 Route::get('/naikAntrian/{id}', 'AntrianController@naik')->name('naik.antrian');
 
 Route::get('/turunAntrian/{id}', 'AntrianController@turun')->name('turun.antrian');
+
+Route::get('/selesaiAntrian/{id}', 'PeriksaController@done')->name('selesai.antrian');

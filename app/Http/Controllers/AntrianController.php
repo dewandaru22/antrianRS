@@ -44,58 +44,46 @@ class AntrianController extends Controller
 
     public function naik ($id)
     {
+
         $antrian = Antrian::first();
         
         //get data berkaitan
         $data = ModelPeriksa::where('id',$id)->first();
 
+        $exchange = ModelPeriksa::where('id',$data->previous)->first();
+
+        //ubah urutan
+
+        if ($antrian->tail == $data->id) {
+            $antrian->tail = $data->previous;
+        }
         if ($antrian->head == $data->previous) {
             $antrian->head = $data->id;
-
-            $exchange = ModelPeriksa::where('id',$data->previous)->first();
-    
-            $depan = null;
-    
-            $blkg = ModelPeriksa::where('id',$data->next)->first();
-    
-            //ubah urutan
-    
-            $data->previous = $exchange->previous;
-            $temp = $data->next;
-            $data->next = $exchange->id;
-    
-            $exchange->previous = $data->id;
-            $exchange->next = $temp;
-    
-            // $depan->next = $data->id;
-            $blkg->previous = $exchange->id;
-            
-        } else {
-            $exchange = ModelPeriksa::where('id',$data->previous)->first();
-    
-            $depan = ModelPeriksa::where('id',$exchange->previous)->first();
-    
-            $blkg = ModelPeriksa::where('id',$data->next)->first();
-    
-            //ubah urutan
-    
-            $data->previous = $exchange->previous;
-            $temp = $data->next;
-            $data->next = $exchange->id;
-    
-            $exchange->previous = $data->id;
-            $exchange->next = $temp;
-    
-            $depan->next = $data->id;
-            $blkg->previous = $exchange->id;
-
-            $depan->save();
-            
         }
+
+        if ($exchange->previous) {
+            $data->previous = $exchange->previous;
+            $depan = ModelPeriksa::where('id',$exchange->previous)->first();
+            $depan->next = $data->id;
+            $depan->save();
+        }else{
+            $exchange->previous = null;
+        }
+
+        if ($data->next) {
+            $exchange->next = $data->next;
+            $blkg = ModelPeriksa::where('id',$data->next)->first();
+            $blkg->previous = $exchange->id;
+            $blkg->save();
+        }else {
+            $exchange->next = null;
+        }
+
+        $data->next = $exchange->id;
+        $exchange->previous = $data->id;
 
         $data->save();
         $exchange->save();
-        $blkg->save();
         $antrian->save();
         
         Session::flash('success','Antrian Berhasil di Ubah!');
@@ -110,52 +98,41 @@ class AntrianController extends Controller
         //get data berkaitan
         $data = ModelPeriksa::where('id',$id)->first();
 
+        $exchange = ModelPeriksa::where('id',$data->next)->first();
+
+        //ubah urutan
+
         if ($antrian->tail == $data->next) {
             $antrian->tail = $data->id;
-
-            $exchange = ModelPeriksa::where('id',$data->next)->first();
-    
-            $depan = ModelPeriksa::where('id',$data->previous)->first();
-    
-            $blkg = null;
-    
-            //ubah urutan
-    
-            $temp = $data->previous;
-            $data->previous = $exchange->id;
-            $data->next = $exchange->next;
-    
-            $exchange->previous = $temp;
-            $exchange->next = $data->id;
-    
-            $depan->next = $exchange->id;
-            
-        } else {
-            $exchange = ModelPeriksa::where('id',$data->next)->first();
-    
-            $depan = ModelPeriksa::where('id',$data->previous)->first();
-    
-            $blkg = ModelPeriksa::where('id',$exchange->previous)->first();
-    
-            //ubah urutan
-    
-            $temp = $data->previous;
-            $data->previous = $exchange->id;
-            $data->next = $exchange->next;
-    
-            $exchange->previous = $temp;
-            $exchange->next = $data->id;
-    
-            $depan->next = $exchange->id;
-            $blkg->previous = $data->id;
-
-            $blkg->save();
-            
         }
+        if ($antrian->head == $data->id) {
+            // dd('test');
+            $antrian->head = $data->next;
+        }
+
+        if ($data->previous) {
+            $exchange->previous = $data->previous;
+            $depan = ModelPeriksa::where('id',$data->previous)->first();
+            $depan->next = $exchange->id;
+            $depan->save();
+        }else{
+            $exchange->previous = null;
+        }
+
+        if ($exchange->next) {
+            $data->next = $exchange->next;
+            $blkg = ModelPeriksa::where('id',$exchange->next)->first();
+            $blkg->previous = $data->id;
+            $blkg->save();
+        }else {
+            $data->next = null;
+        }
+
+        $data->previous = $exchange->id;
+        $exchange->next = $data->id;
 
         $data->save();
         $exchange->save();
-        $depan->save();
         $antrian->save();
         
         Session::flash('success','Antrian Berhasil di Ubah!');

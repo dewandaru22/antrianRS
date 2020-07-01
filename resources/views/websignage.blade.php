@@ -55,40 +55,32 @@
         <div class="row align-items-center justify-content-center">
 
         <div class="main">
-            <div class="card">
-                  <h6>D1 - 001</h6>
-            </div>
-            <br/>
             <div class="card2">
-              <label for="mata_pelajaran" style="float:right">
-                  <select id="mata_pelajaran" name="mata_pelajaran" class="form-control" style="float:right">
-                      <option value="Matematika">Pilih Dokter</option>
-                      <option value="IPA">Dr.</option>
-                      <option value="IPS">Dr.</option>
-                      <option value="Bahasa Inggris">Dr.</option>
-                  </select> 
-              </label>
+                  <h5 style="color:#ffffff">Pasien Saat Ini</h5>
+            </div>
+            <div class="card">
+                  <h6>{{$antrian->heads->nomor_periksa}}</h6>
             </div>
             <br/>
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Selanjutnya</h5>
             </div>
             <div class="card3">
-                  <h5>D1 - 002</h5>
+                  <h5>{{$data->nomor_periksa}}</h5>
             </div>
             <br/>
             <div class="card2">
-                  <h5 style="color:#ffffff">Pasien Dilewati</h5>
+                  <h5 style="color:#ffffff">Pasien Menunggu</h5>
             </div>
             <div class="card3">
-                  <h5>-</h5>
+                  <h5>{{$count}}</h5>
             </div>
             <br/>
             <div class="card2">
-                  <h5 style="color:#ffffff">Pasien Terakhir</h5>
+                  <h5 style="color:#ffffff">Pasien Selesai</h5>
             </div>
             <div class="card3">
-                  <h5>D1 - 010</h5>
+                  <h5>{{$antrian->tails->nomor_periksa}}</h5>
             </div>
         </div>
       </div>

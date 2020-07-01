@@ -33,27 +33,38 @@
                 <tbody>
                 @foreach($periksa as $p)
                     <tr>
-                        <td>{{ $p->nomor_periksa }}</td>
+                        <td>{{ $p['nomor_periksa'] }}</td>
                         <td>
-                              @if ($p->status == "Menunggu")
-                                  <button class="edit btn btn-sm btn-danger" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p->id}}">
+                              @if ($p['status'] == "Menunggu")
+                                  <button class="edit btn btn-sm btn-danger" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p['id']}}">
                                       Menunggu
                                   </button>
                               @else
-                                  <button class="edit btn btn-sm btn-primary" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p->id}}">
+                                  <button class="edit btn btn-sm btn-success" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p['id']}}">
                                       Diperiksa
                                   </button>
                               @endif
                         </td>
                         
                         <td>
-                            <a href="{{route('naik.antrian',$p->id)}}" class="btn btn-sm btn-success" style="color:white;">
-                                <span class="fa fa-arrow-up"></span>
-                            </a>
-                            <a href="{{route('turun.antrian',$p->id)}}" class="btn btn-sm btn-success" style="color:white;">
+                            @if ($antrian->head != $p['id'])
+                                <a href="{{route('naik.antrian',$p['id'])}}" class="btn btn-sm btn-primary" style="color:white;">
+                                    <span class="fa fa-arrow-up"></span>
+                                </a>
+                            @endif
+
+                            @if ($antrian->tail != $p['id'])
+                            <a href="{{route('turun.antrian',$p['id'])}}" class="btn btn-sm btn-primary" style="color:white;">
                                 <span class="fa fa-arrow-down"></span>
                             </a>
-                            <!-- <button type="button" class="edit btn-icon" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p->id}}">
+
+                            @endif
+                            @if ($antrian->head == $p['id'])
+                            <a href="{{route('selesai.antrian',$p['id'])}}" class="btn btn-sm btn-success" style="color:white;">
+                                <span class="fa fa-check"></span>
+                            </a>
+                            @endif
+                            <!-- <button type="button" class="edit btn-icon" rel="tooltip" data-toggle="modal" data-target="#edit" value="{{$p['id']}}">
                                 <i class="material-icons" style="color: #2B82BC;font-size:1.1rem;cursor: pointer;">edit</i>
                             </button> -->
                         </td>
@@ -88,7 +99,7 @@
                                       <h6 class="text-dark font-weight-light">Nomor Antrian</h6>
                                   </div>
                                   <div class="col-8">
-                                      <h6 class="text-dark font-weight-bold" id="nomor_periksa">{{ $p->nomor_periksa }}</h6>
+                                      <h6 class="text-dark font-weight-bold" id="nomor_periksa">{{ $p['nomor_periksa'] }}</h6>
                                   </div>
                               </div>
                               <div class="row">

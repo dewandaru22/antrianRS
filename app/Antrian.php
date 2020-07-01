@@ -8,13 +8,13 @@ class Antrian extends Model
 {
     protected $table = "antrian";
 
-    public function head()
+    public function heads()
     {
-        return $this->belongsTo('App\Periksa', 'head');
+        return $this->belongsTo('App\ModelPeriksa', 'head');
     }
 
-    public function tail()
+    public function tails()
     {
-        return $this->belongsTo('App\Periksa', 'tail');
+        return $this->belongsTo('App\ModelPeriksa', 'tail');
     }
 }
