@@ -26,7 +26,7 @@
                 <th style="background-color: #93B874">{{$data->nomor_periksa}}</th>
             </tr>
             <tr>
-                <td style="background-color: #184d26">Pasien Menunggu</td>
+                <td style="background-color: #184d26">Sisa Antrian</td>
                 <td style="background-color: #184d26">Pasien Terakhir</td>
             </tr>
             <tr>

@@ -94,11 +94,46 @@ class PeriksaController extends Controller
     }
 
     public function signage(){
-        $antrian = Antrian::with('heads', 'tails')->first();
-        $count = ModelPeriksa::where('status', 'Menunggu')->count();
-        // dd($antrian->heads->next);
+        $antrian = Antrian::with('heads')->first();
         $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
-        return view('/websignage', compact('data', 'antrian', 'count'));
+        $selesai = ModelPeriksa::where('status', 'Selesai')->get();
+        // dd($periksa);
+        $selesai = $selesai->toArray();
+        // dd($periksa);
+
+        $queue = $antrian->head;
+        $periksa = array();
+        $i = 0;
+        $stop = false;
+        while (!$stop) {
+            $key = array_search($queue, array_column($selesai, 'id'));
+            array_push($periksa, $selesai[$key]);
+            $queue = $selesai[$key]['next'];
+            $i++;
+            if ($queue == null) {
+                $stop = true;
+            }
+        }
+
+        $array = ModelPeriksa::where('status', 'Menunggu')->get();
+        // dd($periksa);
+        $array = $array->toArray();
+        // dd($periksa);
+        $queue = $antrian->head;
+        $periksa = array();
+        $i = 0;
+        $stop = false;
+        while (!$stop) {
+            $key = array_search($queue, array_column($array, 'id'));
+            array_push($periksa, $array[$key]);
+            $queue = $array[$key]['next'];
+            $i++;
+            if ($queue == null) {
+                $stop = true;
+            }
+        }
+        //dd($periksa);
+        return view('/websignage', compact('data', 'antrian', 'periksa', 'selesai'));
     }
 }

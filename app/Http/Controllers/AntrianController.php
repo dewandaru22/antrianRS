@@ -12,6 +12,9 @@ class AntrianController extends Controller
 
     public function add (Request $request){
         $antrian = Antrian::first();
+        if(!$antrian){
+            $antrian = new Antrian;
+        }
 
         //sambungkan data baru ke data tail
         $new = new ModelPeriksa;
@@ -20,6 +23,7 @@ class AntrianController extends Controller
         $new->nomor_periksa = $request->nomor_periksa;
         $new->pasien_id = $request->pasien_id;
         $new->dokter_id = $request->dokter_id;
+        $new->users_id = $request->users_id;
         $new->tanggal = $request->tanggal;
         $new->status = $request->status;
         $new->save();

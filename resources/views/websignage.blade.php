@@ -58,8 +58,8 @@
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Saat Ini</h5>
             </div>
-            <div class="card">
-                  <h6>{{$antrian->heads->nomor_periksa}}</h6>
+            <div class="card3">
+                  <h5>{{$antrian->heads->nomor_periksa}}</h5>
             </div>
             <br/>
             <div class="card2">
@@ -72,16 +72,22 @@
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Menunggu</h5>
             </div>
-            <div class="card3">
-                  <h5>{{$count}}</h5>
+            @foreach($periksa as $p)
+            @if ($antrian->head != $p['id'])
+            <div class="card4">
+                  <h5>{{ $p['nomor_periksa'] }}</h5>
             </div>
+            @endif
+            @endforeach
             <br/>
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Selesai</h5>
             </div>
-            <div class="card3">
-                  <h5>{{$antrian->tails->nomor_periksa}}</h5>
+            @foreach($selesai as $s)
+            <div class="card4">
+                  <h5>{{ $s['nomor_periksa'] }}</h5>
             </div>
+            @endforeach
         </div>
       </div>
     </div>  
