@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Antrian</h1>
+            <h1 class="m-0 text-dark">Antrian</h1>  
           </div><!-- /.col -->
           <div class="col-sm-6">
             
@@ -22,6 +22,17 @@
           <div class="col-lg-12">
             <div class="card">
               <div class="card-body">
+                <div>
+                    <p style="font-size:20px; margin-bottom:10px;">Dokter :
+                        <select id="select_dokter" style="border:1px solid #ced4da; border-radius:0.25rem; box-shadowa: inset 0 0 0 rgba(0, 0, 0, 0); width:50%">
+                            <option selected disabled>Pilih</option>
+                        @foreach ($dokter as $d)
+                            <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
+                        @endforeach
+                        </select>
+                    </p>
+                       
+                </div>
               <table class="table table-responsive-lg table-bordered small" id="jadwal">
                 <thead class="thead-dark">
                     <tr>
@@ -99,7 +110,7 @@
                                       <h6 class="text-dark font-weight-light">Nomor Antrian</h6>
                                   </div>
                                   <div class="col-8">
-                                      <h6 class="text-dark font-weight-bold" id="nomor_periksa">{{ $p['nomor_periksa'] }}</h6>
+                                      <h6 class="text-dark font-weight-bold" id="nomor_periksa"></h6>
                                   </div>
                               </div>
                               <div class="row">
@@ -132,6 +143,13 @@
 
 @push('js')
     <script>
+
+        $('#select_dokter').change(function() {
+            var url = "{{route('perawat.index')}}/" + $(this).val();
+            alert(url);
+            window.location.href = url;
+        });
+
         $(document).ready(function(){
           $.ajaxSetup({
             headers: {

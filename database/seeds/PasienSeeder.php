@@ -15,7 +15,7 @@ class PasienSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-    	for($i = 1; $i <= 6; $i++){
+    	for($i = 1; $i <= 50; $i++){
 
     	      // insert data ke table pegawai menggunakan Faker
     		DB::table('pasien')->insert([

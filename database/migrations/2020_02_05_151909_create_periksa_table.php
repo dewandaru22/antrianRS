@@ -23,6 +23,8 @@ class CreatePeriksaTable extends Migration
             $table->string('status')->default('Menunggu');
             $table->integer('next');
             $table->integer('previous');
+            $table->integer('antrian_id');
+            $table->foreign('antrian_id')->references('id')->on('antrian')->onDelete('cascade');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
             $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');

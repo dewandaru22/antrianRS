@@ -5,40 +5,46 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\ModelPeriksa;
+use App\ModelDokter;
 use App\Antrian;
 use Session;
 
 class PeriksaController extends Controller
 {
-     public function index()
+     public function index($id = null)
      {
-        $antrian = Antrian::first();
+        $antrian = Antrian::where('dokter_id', $id)->first();
         $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
-        // dd($periksa);
+        $dokter = ModelDokter::get();
+        // dd($dokter);
         $array = $array->toArray();
         // dd($periksa);
-
-        $queue = $antrian->head;
         $periksa = array();
-        $i = 0;
-        $stop = false;
-        while (!$stop) {
-            $key = array_search($queue, array_column($array, 'id'));
-            array_push($periksa, $array[$key]);
-            $queue = $array[$key]['next'];
-            $i++;
-            if ($queue == null) {
-                $stop = true;
+        if ($antrian) {
+            # code...
+            $queue = $antrian->head;
+            $i = 0;
+            $stop = false;
+            while (!$stop) {
+                $key = array_search($queue, array_column($array, 'id'));
+                array_push($periksa, $array[$key]);
+                $queue = $array[$key]['next'];
+                $i++;
+                if ($queue == null) {
+                    $stop = true;
+                }
             }
         }
+
         // dd($periksa);
-     	return view('perawat/perawat', compact('periksa', 'antrian'));
+     	return view('perawat/perawat', compact('periksa', 'antrian', 'dokter'));
      }
 
      public function done($id){
-        $antrian = Antrian::first();
-
+         
         $data = ModelPeriksa::findOrFail($id);
+        $antrian = Antrian::where('head', $id)->first();
+
         $next = ModelPeriksa::where('id',$data->next)->first();
         $next->previous = null;
         $next->save();
@@ -53,7 +59,7 @@ class PeriksaController extends Controller
         
         Session::flash('success','Antrian Berhasil di Ubah!');
 
-        return redirect()->route('perawat.index');
+        return redirect()->route('perawat.index', $antrian->dokter_id);
      }
 
      public function edit($id)
@@ -94,43 +100,31 @@ class PeriksaController extends Controller
     }
 
     public function signage(){
-        $antrian = Antrian::with('heads')->first();
+        $antrian = Antrian::where('heads','dokter_id', $id)->first();
         $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
         $selesai = ModelPeriksa::where('status', 'Selesai')->get();
-        // dd($periksa);
-        $selesai = $selesai->toArray();
-        // dd($periksa);
-
-        $queue = $antrian->head;
-        $periksa = array();
-        $i = 0;
-        $stop = false;
-        while (!$stop) {
-            $key = array_search($queue, array_column($selesai, 'id'));
-            array_push($periksa, $selesai[$key]);
-            $queue = $selesai[$key]['next'];
-            $i++;
-            if ($queue == null) {
-                $stop = true;
-            }
-        }
 
         $array = ModelPeriksa::where('status', 'Menunggu')->get();
+
+        $dokter = ModelDokter::get();
         // dd($periksa);
         $array = $array->toArray();
         // dd($periksa);
-        $queue = $antrian->head;
         $periksa = array();
-        $i = 0;
-        $stop = false;
-        while (!$stop) {
-            $key = array_search($queue, array_column($array, 'id'));
-            array_push($periksa, $array[$key]);
-            $queue = $array[$key]['next'];
-            $i++;
-            if ($queue == null) {
-                $stop = true;
+        if ($antrian) {
+            # code...
+            $queue = $antrian->head;
+            $i = 0;
+            $stop = false;
+            while (!$stop) {
+                $key = array_search($queue, array_column($array, 'id'));
+                array_push($periksa, $array[$key]);
+                $queue = $array[$key]['next'];
+                $i++;
+                if ($queue == null) {
+                    $stop = true;
+                }
             }
         }
         //dd($periksa);

@@ -11,10 +11,12 @@ class AntrianController extends Controller
 {
 
     public function add (Request $request){
-        $antrian = Antrian::first();
+        $antrian = Antrian::where('dokter_id', $request->dokter_id)->first();
         if(!$antrian){
             $antrian = new Antrian;
         }
+
+        $antrian->dokter_id = $request->dokter_id;
 
         //sambungkan data baru ke data tail
         $new = new ModelPeriksa;
@@ -48,12 +50,11 @@ class AntrianController extends Controller
 
     public function naik ($id)
     {
-
-        $antrian = Antrian::first();
-        
         //get data berkaitan
         $data = ModelPeriksa::where('id',$id)->first();
 
+        $antrian = Antrian::where('dokter_id', $data->dokter_id)->first();
+        
         $exchange = ModelPeriksa::where('id',$data->previous)->first();
 
         //ubah urutan
@@ -92,15 +93,14 @@ class AntrianController extends Controller
         
         Session::flash('success','Antrian Berhasil di Ubah!');
 
-        return redirect()->route('perawat.index');
+        return redirect()->route('perawat.index', $antrian->dokter_id);
     }
 
     public function turun ($id)
     {
-        $antrian = Antrian::first();
-        
         //get data berkaitan
         $data = ModelPeriksa::where('id',$id)->first();
+        $antrian = Antrian::where('dokter_id', $data->dokter_id)->first();
 
         $exchange = ModelPeriksa::where('id',$data->next)->first();
 
@@ -141,7 +141,7 @@ class AntrianController extends Controller
         
         Session::flash('success','Antrian Berhasil di Ubah!');
 
-        return redirect()->route('perawat.index');
+        return redirect()->route('perawat.index', $antrian->dokter_id);
     }
 
 }

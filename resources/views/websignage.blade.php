@@ -55,9 +55,20 @@
         <div class="row align-items-center justify-content-center">
 
         <div class="main">
+          <div class="card2">
+              <label style="float:right">
+                  <select class="form-control" style="float:right">
+                  <option selected disabled>Pilih</option>
+                        @foreach ($dokter as $d)
+                            <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
+                        @endforeach
+                  </select> 
+              </label>
+            </div>
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Saat Ini</h5>
             </div>
+            
             <div class="card3">
                   <h5>{{$antrian->heads->nomor_periksa}}</h5>
             </div>
@@ -85,7 +96,7 @@
             </div>
             @foreach($selesai as $s)
             <div class="card4">
-                  <h5>{{ $s['nomor_periksa'] }}</h5>
+                  <h5>{{ $s->nomor_periksa }}</h5>
             </div>
             @endforeach
         </div>

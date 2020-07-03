@@ -17,8 +17,10 @@ class Antrian extends Migration
             $table->increments('id');
             $table->integer('head')->unsigned()->nullable();
             $table->integer('tail')->unsigned()->nullable();
+            $table->integer('dokter_id')->unsigned()->nullable();
             $table->foreign('head')->references('id')->on('periksa');
             $table->foreign('tail')->references('id')->on('periksa');
+            $table->foreign('dokter_id')->references('id')->on('dokter');
             $table->timestamps();
         });
     }

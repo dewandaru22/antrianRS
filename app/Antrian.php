@@ -17,4 +17,9 @@ class Antrian extends Model
     {
         return $this->belongsTo('App\ModelPeriksa', 'tail');
     }
+
+    // public function antrian()
+    // {
+    //     return $this->belongsTo('App\ModelPeriksa', 'antrian_id');
+    // }
 }
