@@ -16,15 +16,13 @@ class CreatePeriksaTable extends Migration
         Schema::create('periksa', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nomor_periksa');
-            $table->integer('pasien_id')->unsigned()->nullable();;
-            $table->integer('dokter_id')->unsigned()->nullable();;
-            $table->integer('users_id')->unsigned()->nullable();;
+            $table->integer('pasien_id')->unsigned()->nullable();
+            $table->integer('dokter_id')->unsigned()->nullable();
+            $table->integer('users_id')->unsigned()->nullable();
             $table->date('tanggal');
             $table->string('status')->default('Menunggu');
-            $table->integer('next');
-            $table->integer('previous');
-            $table->integer('antrian_id');
-            $table->foreign('antrian_id')->references('id')->on('antrian')->onDelete('cascade');
+            $table->integer('next')->unsigned()->nullable();
+            $table->integer('previous')->unsigned()->nullable();
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('pasien_id')->references('id')->on('pasien')->onDelete('cascade');
             $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');

@@ -25,10 +25,10 @@
                 <div>
                     <p style="font-size:20px; margin-bottom:10px;">Dokter :
                         <select id="select_dokter" style="border:1px solid #ced4da; border-radius:0.25rem; box-shadowa: inset 0 0 0 rgba(0, 0, 0, 0); width:50%">
-                            <option selected disabled>Pilih</option>
-                        @foreach ($dokter as $d)
+                            <option selected disabled>Pilih Dokter</option>
+                            @foreach ($dokter as $d)
                             <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
-                        @endforeach
+                            @endforeach
                         </select>
                     </p>
                        
@@ -170,15 +170,9 @@
 
                         $.each(servers, function(index, value){
                             var nomor_periksa = value.nomor_periksa;
-                            var pasien_id = value.pasien_id;
-                            var dokter_id = value.dokter_id;
-                            var tanggal = value.tanggal;
                             var status = value.status;
                             
                             $('#nomor_periksa').text(nomor_periksa);
-                            $('#pasien_id').text(pasien_id);
-                            $('#dokter_id').text(dokter_id);
-                            $('#tanggal').text(tanggal);
                             $('div#status select').val(status);
 
                         });

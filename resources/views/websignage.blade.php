@@ -9,23 +9,23 @@
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
 
-    <link rel="stylesheet" href="/template/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/template/css/jquery-ui.css">
-    <link rel="stylesheet" href="/template/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="/template/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="/template/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('/template/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/template/css/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('/template/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/template/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/template/css/owl.theme.default.min.css') }}">
 
-    <link rel="stylesheet" href="/template/css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="{{ asset('/template/css/jquery.fancybox.min.css') }}">
 
-    <link rel="stylesheet" href="/template/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="{{ asset('/template/css/bootstrap-datepicker.css') }}">
 
-    <link rel="stylesheet" href="/template/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="{{ asset('/template/fonts/flaticon/font/flaticon.css') }}">
 
-    <link rel="stylesheet" href="/template/css/aos.css">
+    <link rel="stylesheet" href="{{ asset('/template/css/aos.css') }}">
 
-    <link rel="stylesheet" href="/template/css/style.css">
+    <link rel="stylesheet" href="{{ asset('/template/css/style.css') }}">
 
-    <link rel="stylesheet" href="/template/scss/bootstrap/_card.scss">
+    <link rel="stylesheet" href="{{ asset('/template/scss/bootstrap/_card.scss') }}">
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -37,7 +37,7 @@
           
           <div class="col-6 col-xl-2">
             <h1 class="mb-0 site-logo"><a href="/awal" class="text-black mb-0">
-              <img class="navbar-brand-full" src="{{('/template/images/rs-islam-logo.png')}}" width="150" height="40" alt="rsiy logo" href="/awal">
+              <img class="navbar-brand-full" src="{{asset ('/template/images/rs-islam-logo.png')}}" width="150" height="40" alt="rsiy logo" href="/websignage">
             </a></h1>
           </div>
           
@@ -50,55 +50,93 @@
   
   <div class="site-wrap">
 
-    <div class="site-blocks-cover overlay" style="background-image: url('template/images/rsiy.jpg');" data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover overlay" style="background-image: url('{{ asset('/template/images/rsiy.jpg')}}'); " data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center">
 
-        <div class="main">
-          <div class="card2">
+          <div class="main">
+            <div class="card2">
+                  <h5 style="color:#ffffff">ANTRIAN RSIY PDHI YOGYAKARTA</h5>
+            </div>
+            <br/>
+            <div class="card2">
               <label style="float:right">
-                  <select class="form-control" style="float:right">
-                  <option selected disabled>Pilih</option>
-                        @foreach ($dokter as $d)
-                            <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
-                        @endforeach
-                  </select> 
+                <select id="select_dokter" class="form-control">
+                  <option selected disabled>Pilih Dokter</option>
+                  @foreach ($dokter as $d)
+                  <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
+                  @endforeach
+                </select>
               </label>
             </div>
+
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Saat Ini</h5>
             </div>
             
             <div class="card3">
-                  <h5>{{$antrian->heads->nomor_periksa}}</h5>
+                  <h5>
+                  {{ $antrian ==  null ? '-' :  $antrian->heads->nomor_periksa}}
+                  </h5>
             </div>
             <br/>
+
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Selanjutnya</h5>
             </div>
             <div class="card3">
-                  <h5>{{$data->nomor_periksa}}</h5>
+                  <h5>
+                  {{ $antrian ==  null ? '-' :  $data->nomor_periksa}}
+                  </h5>
             </div>
+
             <br/>
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Menunggu</h5>
             </div>
-            @foreach($periksa as $p)
-            @if ($antrian->head != $p['id'])
-            <div class="card4">
-                  <h5>{{ $p['nomor_periksa'] }}</h5>
-            </div>
+            
+            @if($antrian == null)
+              <div class="card4">
+                <h5>
+                  -
+                </h5>
+              </div>
+            @else
+              @foreach($periksa as $p)
+                
+                @if ($antrian->head != $p['id'])
+                  <div class="card4">
+                    <h5>{{ $p['nomor_periksa'] }}</h5>
+                  </div>
+                @endif
+                
+              @endforeach
             @endif
-            @endforeach
+            
             <br/>
+
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Selesai</h5>
             </div>
-            @foreach($selesai as $s)
-            <div class="card4">
-                  <h5>{{ $s->nomor_periksa }}</h5>
-            </div>
-            @endforeach
+            
+            @if($antrian == null)
+              <div class="card4">
+                <h5>
+                  -
+                </h5>
+              </div>
+            @else
+              @foreach($selesai as $s)
+                <div class="card4">
+                  <h5>
+                    {{ $antrian ==  null ? '-' : $s->nomor_periksa}}
+                  </h5>
+                </div>
+              @endforeach
+            @endif
+            
+            
+
         </div>
       </div>
     </div>  
@@ -106,22 +144,31 @@
 
   </div> <!-- .site-wrap -->
 
-  <script src="/template/js/jquery-3.3.1.min.js"></script>
-  <script src="/template/js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="/template/js/jquery-ui.js"></script>
-  <script src="/template/js/popper.min.js"></script>
-  <script src="/template/js/bootstrap.min.js"></script>
-  <script src="/template/js/owl.carousel.min.js"></script>
-  <script src="/template/js/jquery.stellar.min.js"></script>
-  <script src="/template/js/jquery.countdown.min.js"></script>
-  <script src="/template/js/bootstrap-datepicker.min.js"></script>
-  <script src="/template/js/jquery.easing.1.3.js"></script>
-  <script src="/template/js/aos.js"></script>
-  <script src="/template/js/jquery.fancybox.min.js"></script>
-  <script src="/template/js/jquery.sticky.js"></script>
-
+  <script src="{{ asset('/template/js/jquery-3.3.1.min.js') }}"></script>
+  <script src="{{ asset('/template/js/jquery-migrate-3.0.1.min.js') }}"></script>
+  <script src="{{ asset('/template/js/jquery-ui.js') }}"></script>
+  <script src="{{ asset('/template/js/popper.min.js') }}"></script>
+  <script src="{{ asset('/template/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('/template/js/owl.carousel.min.js') }}"></script>
+  <script src="{{ asset('/template/js/jquery.stellar.min.js') }}"></script>
+  <script src="{{ asset('/template/js/jquery.countdown.min.js') }}"></script>
+  <script src="{{ asset('/template/js/bootstrap-datepicker.min.js') }}"></script>
+  <script src="{{ asset('/template/js/jquery.easing.1.3.js') }}"></script>
+  <script src="{{ asset('/template/js/aos.js') }}"></script>
+  <script src="{{ asset('/template/js/jquery.fancybox.min.js') }}"></script>
   
-  <script src="/template/js/main.js"></script>
+  <script src="{{ asset('/template/js/main.js') }}"></script>
+  
+  <script>
+
+        $('#select_dokter').change(function() {
+            var url = "{{route('websignage')}}/" + $(this).val();
+            alert(url);
+            window.location.href = url;
+        });
+
+  </script>
+
     
   </body>
 </html>

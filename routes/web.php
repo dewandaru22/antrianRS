@@ -41,7 +41,7 @@ Route::get('/landing', function () {
 
 Route::get('/infoantrian', 'PeriksaController@infoAntrian')->name('antrian');
 
-Route::get('/websignage', 'PeriksaController@signage')->name('websignage');
+Route::get('/websignage/{id?}', 'PeriksaController@signage')->name('websignage');
 
 Route::get('/changePassword', function(){
     return view('perawat/changePassword');

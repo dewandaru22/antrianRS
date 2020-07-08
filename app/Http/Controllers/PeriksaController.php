@@ -70,14 +70,15 @@ class PeriksaController extends Controller
      }
 
      public function update(Request $request, $id)
-    {
+     {
+        $antrian = Antrian::where('dokter_id', $id)->first();
         $periksa = ModelPeriksa::where('id',$id)->first();
         $periksa->status = $request->status;
         $periksa->save();
 
         Session::flash('success','Status Berhasil di Ubah!');
 
-        return redirect()->route('perawat.index');
+        return redirect()->route('perawat.index', $antrian->dokter_id);
      
         // $periksa = ModelPeriksa::where('id',$id)->first();
         // $periksa->nomor_periksa = $request->nomor_periksa;
@@ -87,7 +88,6 @@ class PeriksaController extends Controller
         // $periksa->status = $request->status;
         // $periksa->save();
         // return redirect('/perawat');
-
     }
 
     public function infoAntrian(){
@@ -99,16 +99,18 @@ class PeriksaController extends Controller
         return view('/antrian', compact('data', 'antrian', 'count'));
     }
 
-    public function signage(){
-        $antrian = Antrian::where('heads','dokter_id', $id)->first();
+public function signage($id = null){
+    $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
+    
+    $dokter = ModelDokter::get();
+
+    if($antrian != null){
         $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
-        $selesai = ModelPeriksa::where('status', 'Selesai')->get();
+        $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
 
-        $array = ModelPeriksa::where('status', 'Menunggu')->get();
-
-        $dokter = ModelDokter::get();
-        // dd($periksa);
+        $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
+        // dd($dokter);
         $array = $array->toArray();
         // dd($periksa);
         $periksa = array();
@@ -127,7 +129,10 @@ class PeriksaController extends Controller
                 }
             }
         }
-        //dd($periksa);
-        return view('/websignage', compact('data', 'antrian', 'periksa', 'selesai'));
+    return view('/websignage', compact('antrian', 'periksa', 'selesai', 'dokter', 'data'));
+    }else{
+    return view('/websignage', compact('dokter', 'antrian'));
     }
+}
+
 }

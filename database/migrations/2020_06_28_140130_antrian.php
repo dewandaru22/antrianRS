@@ -18,9 +18,9 @@ class Antrian extends Migration
             $table->integer('head')->unsigned()->nullable();
             $table->integer('tail')->unsigned()->nullable();
             $table->integer('dokter_id')->unsigned()->nullable();
-            $table->foreign('head')->references('id')->on('periksa');
-            $table->foreign('tail')->references('id')->on('periksa');
-            $table->foreign('dokter_id')->references('id')->on('dokter');
+            $table->foreign('head')->references('id')->on('periksa')->onDelete('cascade');
+            $table->foreign('tail')->references('id')->on('periksa')->onDelete('cascade');
+            $table->foreign('dokter_id')->references('id')->on('dokter')->onDelete('cascade');
             $table->timestamps();
         });
     }

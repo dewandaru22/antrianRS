@@ -6,7 +6,8 @@ body {
   font-size: 1rem; }
 
   .main{
-    margin-top: 100px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .card {
     position: relative;
@@ -701,7 +702,7 @@ h1, h2, h3, h4, h5,
     width: 100%; }
   .site-blocks-cover, .site-blocks-cover > .container > .row {
     min-height: 600px;
-    height: calc(100vh); }
+    /* height: calc(120vh);  */}
   .site-blocks-cover.inner-page-cover, .site-blocks-cover.inner-page-cover > .container > .row {
     min-height: 400px;
     height: calc(20vh); }
