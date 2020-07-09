@@ -1,44 +1,29 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+  <title>Sistem Antrian</title>
+  <link rel="stylesheet" href="https://bootstrap/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="https://>bootstrap/css/jquery-ui.min.css">  
+  <link rel="stylesheet" type="text/css" href="{{ asset('/css/app.css') }}">
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th colspan="5" style="background-color: transparent; padding: 20px;">
-                    <img class="navbar-brand-full" src="{{('/template/images/rs-islam-logo.png')}}" width="200" height="60" alt="rsiy logo" href="/awal">
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>                
-                <td style="background-color: #184d26">Pasien Saat Ini</td>
-                <td rowspan="4" style="background-color: transparent"></td>
-                <td style="background-color: #184d26">Pasien Selanjutnya</td>
-                <td rowspan="4" style="background-color: transparent"></td>
-                <th colspan="2" rowspan="4" style="background-image: url('template/images/rsiy.jpg');">
-                    <!-- <img class="navbar-brand-full" src="{{('/template/images/rsiy.jpg')}}" width="100%" height="90%" alt="rsiy logo" href="/awal"> -->
-                </th>
-            </tr>
-            <tr>
-                <th style="background-color: #93B874">{{$antrian->heads->nomor_periksa}}</th>
-                <th style="background-color: #93B874">{{$data->nomor_periksa}}</th>
-            </tr>
-            <tr>
-                <td style="background-color: #184d26">Sisa Antrian</td>
-                <td style="background-color: #184d26">Pasien Terakhir</td>
-            </tr>
-            <tr>
-                <th style="background-color: #93B874">{{$count}}</th>
-                <th style="background-color: #93B874">{{$antrian->tails->nomor_periksa}}</th>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <th colspan="5" style="background-color: #184d26; color:#f5f5f5; font-size:30px;"><marquee>Selamat Datang di RSIY PDHI</marquee></th>
-            </tr>
-        </tfoot>
-    </table>
+<div class="container-fluid alert-danger">
+<div class="row">
+    
+    @foreach ($data as $d)
+  <div class="col-md-4">
+    <div class="btn-danger" style="font-size: 20px;font-weight: bold;width: 100%;">{{ $d->nama_dokter }}</div>
+    <div class="text-lg-center btn-success img-thumbnail" style="font-size: 50px;font-weight: bold;width: 100%;">
+        {{ $d->antrian == null ? '' : $d->antrian->heads->nomor_periksa }}
+        <div class="btn-danger">{{$d->periksa->where('status', 'Menunggu')->count()}}</div>
+    </div>
+    <hr/>
+  </div>
+  @endforeach
+
+</div>
+</div>
+<script src="https://bootstrap/js/jquery.min.js"></script>
+<script src="https://bootstrap/js/jquery-ui.min.js"></script>
+
 </body>
 </html>

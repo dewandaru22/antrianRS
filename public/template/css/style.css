@@ -65,6 +65,22 @@ body {
     background-clip: border-box;
   }
 
+  .card5 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    max-width: 450px;
+    height: 70px;
+    word-wrap: break-word;
+    margin: 0 auto;
+    border-color: #0D610E;
+    background-color: #ffffff;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    background-clip: border-box;
+  }
+
 .kotak1{
   position: relative;
   display: flex;
@@ -108,6 +124,16 @@ body {
 }
 
 .card4 h5 {
+  display:table-cell; 
+  vertical-align: middle; 
+  text-align: center; 
+  font-size: 24px; 
+  font-weight: 600; 
+  color: #000000;
+  margin: auto;
+}
+
+.card5 h5 {
   display:table-cell; 
   vertical-align: middle; 
   text-align: center; 

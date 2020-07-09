@@ -71,68 +71,94 @@ class PeriksaController extends Controller
 
      public function update(Request $request, $id)
      {
-        $antrian = Antrian::where('dokter_id', $id)->first();
         $periksa = ModelPeriksa::where('id',$id)->first();
         $periksa->status = $request->status;
         $periksa->save();
 
         Session::flash('success','Status Berhasil di Ubah!');
 
-        return redirect()->route('perawat.index', $antrian->dokter_id);
-     
-        // $periksa = ModelPeriksa::where('id',$id)->first();
-        // $periksa->nomor_periksa = $request->nomor_periksa;
-        // $periksa->pasien_id = $request->pasien_id;
-        // $periksa->dokter_id = $request->dokter_id;
-        // $periksa->tanggal = $request->tanggal;
-        // $periksa->status = $request->status;
-        // $periksa->save();
-        // return redirect('/perawat');
+        return redirect()->route('perawat.index', $periksa->dokter_id);
     }
 
     public function infoAntrian(){
-        $antrian = Antrian::with('heads', 'tails')->first();
-        $count = ModelPeriksa::where('status', 'Menunggu')->count();
-        // dd($antrian->heads->next);
-        $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
-        return view('/antrian', compact('data', 'antrian', 'count'));
+        $antrian = Antrian::with('heads')->get();
+
+        $data = ModelDokter::with('antrian.heads', 'periksa')->get();
+
+        return view('/antrian', compact('data', 'antrian'));
     }
 
-public function signage($id = null){
-    $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
-    
-    $dokter = ModelDokter::get();
+    public function signage($id = null){
+        $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
+        
+        $dokter = ModelDokter::get();
 
-    if($antrian != null){
-        $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
+        if($antrian != null){
+            $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
-        $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
+            $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
 
-        $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
-        // dd($dokter);
-        $array = $array->toArray();
-        // dd($periksa);
-        $periksa = array();
-        if ($antrian) {
-            # code...
-            $queue = $antrian->head;
-            $i = 0;
-            $stop = false;
-            while (!$stop) {
-                $key = array_search($queue, array_column($array, 'id'));
-                array_push($periksa, $array[$key]);
-                $queue = $array[$key]['next'];
-                $i++;
-                if ($queue == null) {
-                    $stop = true;
+            $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
+            // dd($dokter);
+            $array = $array->toArray();
+            // dd($periksa);
+            $periksa = array();
+            if ($antrian) {
+                # code...
+                $queue = $antrian->head;
+                $i = 0;
+                $stop = false;
+                while (!$stop) {
+                    $key = array_search($queue, array_column($array, 'id'));
+                    array_push($periksa, $array[$key]);
+                    $queue = $array[$key]['next'];
+                    $i++;
+                    if ($queue == null) {
+                        $stop = true;
+                    }
                 }
             }
+        return view('/websignage', compact('antrian', 'periksa', 'selesai', 'dokter', 'data'));
+        }else{
+        return view('/websignage', compact('dokter', 'antrian'));
         }
-    return view('/websignage', compact('antrian', 'periksa', 'selesai', 'dokter', 'data'));
-    }else{
-    return view('/websignage', compact('dokter', 'antrian'));
     }
-}
+
+    public function monitorDokter($id = null){
+        $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
+        
+        $dokter = ModelDokter::get();
+
+        if($antrian != null){
+            $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
+
+            $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
+
+            $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
+            // dd($dokter);
+            $array = $array->toArray();
+            // dd($periksa);
+            $periksa = array();
+            if ($antrian) {
+                # code...
+                $queue = $antrian->head;
+                $i = 0;
+                $stop = false;
+                while (!$stop) {
+                    $key = array_search($queue, array_column($array, 'id'));
+                    array_push($periksa, $array[$key]);
+                    $queue = $array[$key]['next'];
+                    $i++;
+                    if ($queue == null) {
+                        $stop = true;
+                    }
+                }
+            }
+        return view('/signagePeriksa', compact('antrian', 'periksa', 'selesai', 'dokter', 'data'));
+        }else{
+        return view('/signagePeriksa', compact('dokter', 'antrian'));
+        }
+    }
 
 }
