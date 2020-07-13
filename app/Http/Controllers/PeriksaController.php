@@ -57,7 +57,7 @@ class PeriksaController extends Controller
         $antrian->head = $next->id;
         $antrian->save();
         
-        Session::flash('success','Antrian Berhasil di Ubah!');
+        Session::flash('success','Antrian Selesai Diperiksa!');
 
         return redirect()->route('perawat.index', $antrian->dokter_id);
      }
@@ -125,23 +125,23 @@ class PeriksaController extends Controller
         }
     }
 
-    public function monitorDokter($id = null){
-        $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
-        
+    public function monitorDokter(){
         $dokter = ModelDokter::get();
+        return view('/signagePeriksa', compact('dokter'));
+    }
+
+    public function ruanganDokter($id){
+        $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
+
+        $dokter = ModelDokter::where('id', $id)->first();
 
         if($antrian != null){
             $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
-            $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
-
             $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
-            // dd($dokter);
             $array = $array->toArray();
-            // dd($periksa);
             $periksa = array();
             if ($antrian) {
-                # code...
                 $queue = $antrian->head;
                 $i = 0;
                 $stop = false;
@@ -155,10 +155,11 @@ class PeriksaController extends Controller
                     }
                 }
             }
-        return view('/signagePeriksa', compact('antrian', 'periksa', 'selesai', 'dokter', 'data'));
+        return view('/ruanganDokter', compact('antrian', 'periksa','data', 'dokter'));
         }else{
-        return view('/signagePeriksa', compact('dokter', 'antrian'));
+        return view('/ruanganDokter', compact( 'antrian', 'dokter'));
         }
+
     }
 
 }

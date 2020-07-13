@@ -55,48 +55,29 @@
         <div class="row align-items-center justify-content-center">
 
           <div class="main">
-            <div class="card7">
-                  <h5 style="color:#ffffff">ANTRIAN RSIY PDHI YOGYAKARTA</h5>
-            </div>
+            <div class="card5">
+                <h5>
+                  {{$dokter->nama_dokter}}
+                </h5>
+              </div>
             <br/>
-            <div class="card2">
-              <label style="float:right">
-                <select id="select_dokter" class="form-control">
-                  <option selected disabled>Pilih Dokter</option>
-                  @foreach ($dokter as $d)
-                  <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
-                  @endforeach
-                </select>
-              </label>
-            </div>
-
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Saat Ini</h5>
             </div>
-            
-            <div class="card3">
-                  <h5>
-                  {{ $antrian ==  null ? '-' :  $antrian->heads->nomor_periksa}}
-                  </h5>
+            <div class="card5">
+                <h5>
+                {{ $antrian ==  null ? '-' :  $antrian->heads->nomor_periksa}}
+                </h5>
             </div>
+
             <br/>
 
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Selanjutnya</h5>
             </div>
-            <div class="card3">
-                  <h5>
-                  {{ $antrian ==  null ? '-' :  $data->nomor_periksa}}
-                  </h5>
-            </div>
-
-            <br/>
-            <div class="card2">
-                  <h5 style="color:#ffffff">Pasien Menunggu</h5>
-            </div>
             
             @if($antrian == null)
-              <div class="card4">
+              <div class="card5">
                 <h5>
                   -
                 </h5>
@@ -105,37 +86,15 @@
               @foreach($periksa as $p)
                 
                 @if ($antrian->head != $p['id'])
-                  <div class="card4">
+                  <div class="card5">
                     <h5>{{ $p['nomor_periksa'] }}</h5>
                   </div>
                 @endif
                 
               @endforeach
             @endif
-            
             <br/>
 
-            <div class="card2">
-                  <h5 style="color:#ffffff">Pasien Selesai</h5>
-            </div>
-            
-            @if($antrian == null)
-              <div class="card4">
-                <h5>
-                  -
-                </h5>
-              </div>
-            @else
-              @foreach($selesai as $s)
-                <div class="card4">
-                  <h5>
-                    {{ $antrian ==  null ? '-' : $s->nomor_periksa}}
-                  </h5>
-                </div>
-              @endforeach
-            @endif
-            
-            
 
         </div>
       </div>

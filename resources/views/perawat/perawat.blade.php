@@ -157,12 +157,12 @@
             }
           });
             $(document).on('click', '.edit', function(){
-                console.log("test");
                 var id = $(this).attr('value');
+                console.log(id);
                 
                 $.ajax({
                     type        : 'get',
-                    url         : '{!!url('perawat')!!}/'+id,
+                    url         : '{!!url('perawat')!!}/'+id+'/edit',
                     dataType    : 'html',
                     success     : function(data){
                         var servers = $.parseJSON(data);

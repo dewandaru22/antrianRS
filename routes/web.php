@@ -21,9 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/perawat/{id?}', 'PeriksaController@index')->name('perawat.index');
 
-Route::get('/perawat/{id}', 'PeriksaController@edit');
+Route::get('/perawat/{id}/edit', 'PeriksaController@edit');
 Route::put('/perawat/{id}', 'PeriksaController@update')->name('perawat.update');
 Route::get('/perawat/store', 'PeriksaController@store');
+
+Route::get('/profilePerawat', 'PerawatController@data');
 
 // Route::resource('perawat','PeriksaController');
 
@@ -43,10 +45,9 @@ Route::get('/infoantrian', 'PeriksaController@infoAntrian')->name('antrian');
 
 Route::get('/websignage/{id?}', 'PeriksaController@signage')->name('websignage');
 
-Route::get('/signagePeriksa', function () {
-    return view('/signagePeriksa');
-});
+Route::get('/signagePeriksa', 'PeriksaController@monitorDokter')->name('signagePeriksa');
 
+Route::get('/ruanganDokter/{id}', 'PeriksaController@ruanganDokter')->name('ruanganDokter');
 
 Route::get('/changePassword', function(){
     return view('perawat/changePassword');

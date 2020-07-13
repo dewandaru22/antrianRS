@@ -18,8 +18,8 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-header">{{DB::table('users')->where('id','=', Auth::user()->id)->value('name')}}</span>
           <div class="dropdown-divider"></div>
-          <a href="{{ url('/changePassword') }}" class="dropdown-item">
-            <i class="fas fa-edit"></i> Ubah Kata Sandi
+          <a href="{{ url('/profilePerawat') }}" class="dropdown-item">
+            <i class="fas fa-edit"></i> Profile
           </a>
           <a href="{{ url('/landing') }}" class="nav-link btn-login; dropdown-item"
                             onclick="event.preventDefault();

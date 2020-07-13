@@ -55,34 +55,17 @@
         <div class="row align-items-center justify-content-center">
 
           <div class="main">
-            
-            <br/>
-            <div class="card5">
-                  <h5>
-                  dr. Diannisa Ikarumi Enisar Sangun, Sp.OG. 
-                  </h5>
-            </div>
-            <br/>
-
-            <div class="card2">
-                  <h5 style="color:#ffffff">Pasien Saat Ini</h5>
-            </div>
-            
-            <div class="card5">
-                  <h5>
-                  
-                  </h5>
-            </div>
-            <br/>
-
-            <div class="card2">
-                  <h5 style="color:#ffffff">Pasien Menunggu</h5>
-            </div>
-            <div class="card5">
-                  <h5>
-                  
-                  </h5>
-            </div>
+          <div class="card2">
+            <label style="float:right">
+              <select id="select_dokter" class="form-control">
+                <option selected disabled>Pilih Dokter</option>
+                @foreach ($dokter as $d)
+                <option value="{{$d->id}}"> {{$d->nama_dokter}}</option>
+                @endforeach
+              </select>
+            </label>
+          <br/>
+          </div>
 
         </div>
       </div>
@@ -109,8 +92,7 @@
   <script>
 
         $('#select_dokter').change(function() {
-            var url = "{{route('websignage')}}/" + $(this).val();
-            alert(url);
+            var url = '{!!('ruanganDokter')!!}/' + $(this).val();
             window.location.href = url;
         });
 
