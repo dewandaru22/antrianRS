@@ -66,7 +66,7 @@
             </div>
             <div class="card5">
                 <h5>
-                {{ $antrian ==  null ? '-' :  $antrian->heads->nomor_periksa}}
+                {{ $antrian->head ==  null ? '-' :  $antrian->heads->nomor_periksa}}
                 </h5>
             </div>
 
@@ -76,7 +76,7 @@
                   <h5 style="color:#ffffff">Pasien Selanjutnya</h5>
             </div>
             
-            @if($antrian == null)
+            @if($antrian->head == null)
               <div class="card5">
                 <h5>
                   -

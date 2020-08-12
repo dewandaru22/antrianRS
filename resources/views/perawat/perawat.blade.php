@@ -27,7 +27,7 @@
                         <select id="select_dokter" style="border:1px solid #ced4da; border-radius:0.25rem; box-shadowa: inset 0 0 0 rgba(0, 0, 0, 0); width:50%">
                             <option selected disabled>Pilih Dokter</option>
                             @foreach ($dokter as $d)
-                            <option value="{{$d->id}}" {{ $d->id == Route::input('id') ? "selected" : "" }}>{{$d->nama_dokter}}</option>
+                            <option value="{{$d->id}}" {{ $d->id == $id ? "selected" : "" }}>{{$d->nama_dokter}}</option>
                             @endforeach
                         </select>
                     </p>
@@ -97,7 +97,7 @@
               <div class="card card-signup card-plain">
                   <div class="modal-header">
                       <div class="card-header card-header-primary text-center">
-                          <h4>Ubah Status</h4>
+                        <h4 class="card-title">Ubah Status</h4>
                       </div>
                   </div>
                   <form method="POST" action="" id="form">
@@ -128,6 +128,7 @@
                       </div>
                       <div class="modal-footer justify-content-center">
                           <button type="submit" class="btn btn-primary btn-round">Simpan</button>
+                          <button type="submit" class="btn btn-danger btn-round" data-dismiss="modal" aria-hidden="true">Batal</button>
                       </div>
                   </form>
               </div>
@@ -146,7 +147,6 @@
 
         $('#select_dokter').change(function() {
             var url = "{{route('perawat.index')}}/" + $(this).val();
-            alert(url);
             window.location.href = url;
         });
 

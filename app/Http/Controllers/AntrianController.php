@@ -91,7 +91,7 @@ class AntrianController extends Controller
         $exchange->save();
         $antrian->save();
         
-        Session::flash('success','Antrian Berhasil di Ubah!');
+        Session::flash('success','Antrian Berhasil Diubah!');
 
         return redirect()->route('perawat.index', $antrian->dokter_id);
     }
@@ -139,7 +139,7 @@ class AntrianController extends Controller
         $exchange->save();
         $antrian->save();
         
-        Session::flash('success','Antrian Berhasil di Ubah!');
+        Session::flash('success','Antrian Berhasil Diubah!');
 
         return redirect()->route('perawat.index', $antrian->dokter_id);
     }

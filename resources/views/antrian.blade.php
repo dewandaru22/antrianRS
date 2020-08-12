@@ -33,7 +33,7 @@
       <div class="col-md-4">
         <div class="text-lg-center btn-success img-thumbnail" style="font-size: 25px;font-weight: bold; height:160px; margin-bottom:10px;">
             {{ $d->nama_dokter }}
-            <div class="btn-danger" style="font-size: 60px;font-weight: bold; height:110px;">{{ $d->antrian == null ? '' : $d->antrian->heads->nomor_periksa }} </div>
+            <div class="btn-danger" style="font-size: 60px;font-weight: bold; height:110px;">{{ $d->antrian->head == null ? '' : $d->antrian->heads->nomor_periksa }} </div>
         </div>
       </div>
       @endforeach

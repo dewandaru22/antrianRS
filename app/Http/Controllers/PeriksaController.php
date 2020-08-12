@@ -14,17 +14,21 @@ class PeriksaController extends Controller
      public function index($id = null)
      {
         $antrian = Antrian::where('dokter_id', $id)->first();
+        //dd($antrian);
         $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
         $dokter = ModelDokter::get();
         // dd($dokter);
         $array = $array->toArray();
-        // dd($periksa);
         $periksa = array();
         if ($antrian) {
+            if ($antrian->head == null){
+                $stop = true;
+            }else{
+                $stop=false;
+            }
             # code...
             $queue = $antrian->head;
             $i = 0;
-            $stop = false;
             while (!$stop) {
                 $key = array_search($queue, array_column($array, 'id'));
                 array_push($periksa, $array[$key]);
@@ -35,9 +39,8 @@ class PeriksaController extends Controller
                 }
             }
         }
-
-        // dd($periksa);
-     	return view('perawat/perawat', compact('periksa', 'antrian', 'dokter'));
+        //dd($periksa);
+     	return view('perawat/perawat', compact('periksa', 'antrian', 'dokter', 'id'));
      }
 
      public function done($id){
@@ -46,15 +49,21 @@ class PeriksaController extends Controller
         $antrian = Antrian::where('head', $id)->first();
 
         $next = ModelPeriksa::where('id',$data->next)->first();
-        $next->previous = null;
-        $next->save();
+        if($next != null){
+            $next->previous = null;
+            $next->save();
+            $antrian->head = $next->id;
+        }
+        else{
+            $antrian->head = null;
+            $antrian->tail = null;
+        }
 
         $data->status = 'Selesai';
         $data->previous = null;
         $data->next = null;
         $data->save();
 
-        $antrian->head = $next->id;
         $antrian->save();
         
         Session::flash('success','Antrian Selesai Diperiksa!');
@@ -91,13 +100,12 @@ class PeriksaController extends Controller
 
     public function signage($id = null){
         $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
-        
         $dokter = ModelDokter::get();
+        $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
+        $data = null;
 
-        if($antrian != null){
+        if($antrian->head){
             $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
-
-            $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
 
             $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
             // dd($dokter);
@@ -121,7 +129,7 @@ class PeriksaController extends Controller
             }
         return view('/websignage', compact('antrian', 'periksa', 'selesai', 'dokter', 'data'));
         }else{
-        return view('/websignage', compact('dokter', 'antrian'));
+        return view('/websignage', compact('dokter', 'antrian', 'selesai', 'data'));
         }
     }
 
@@ -134,8 +142,9 @@ class PeriksaController extends Controller
         $antrian = Antrian::with('heads')->where('dokter_id', $id)->first();
 
         $dokter = ModelDokter::where('id', $id)->first();
+        $data = null;
 
-        if($antrian != null){
+        if($antrian->head){
             $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
 
             $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();

@@ -76,7 +76,7 @@
             
             <div class="card3">
                   <h5>
-                  {{ $antrian ==  null ? '-' :  $antrian->heads->nomor_periksa}}
+                  {{ $antrian->head ==  null ? '-' :  $antrian->heads->nomor_periksa}}
                   </h5>
             </div>
             <br/>
@@ -86,7 +86,7 @@
             </div>
             <div class="card3">
                   <h5>
-                  {{ $antrian ==  null ? '-' :  $data->nomor_periksa}}
+                  {{ $data ==  null ? '-' :  $data->nomor_periksa}}
                   </h5>
             </div>
 
@@ -95,7 +95,7 @@
                   <h5 style="color:#ffffff">Pasien Menunggu</h5>
             </div>
             
-            @if($antrian == null)
+            @if($antrian->head == null)
               <div class="card4">
                 <h5>
                   -
@@ -163,7 +163,6 @@
 
         $('#select_dokter').change(function() {
             var url = "{{route('websignage')}}/" + $(this).val();
-            alert(url);
             window.location.href = url;
         });
 
