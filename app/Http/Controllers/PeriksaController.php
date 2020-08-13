@@ -104,15 +104,14 @@ class PeriksaController extends Controller
         $selesai = ModelPeriksa::where('dokter_id', $id)->where('status', 'Selesai')->get();
         $data = null;
 
-        if($antrian->head){
-            $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
-
+        if($antrian != null){
             $array = ModelPeriksa::where('status', '!=', 'Selesai')->get();
             // dd($dokter);
             $array = $array->toArray();
             // dd($periksa);
             $periksa = array();
-            if ($antrian) {
+            if ($antrian->head) {
+                $data = ModelPeriksa::where('id',$antrian->heads->next)->first();
                 # code...
                 $queue = $antrian->head;
                 $i = 0;

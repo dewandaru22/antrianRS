@@ -6,9 +6,25 @@ use Illuminate\Http\Request;
 use App\Antrian;
 use Session;
 use App\ModelPeriksa;
+use App\ModelDokter;
 
 class AntrianController extends Controller
 {
+
+    public function addDokter (Request $request){
+        $new = new ModelDokter;
+        
+        $new->nama_dokter = $request->nama_dokter;
+        $new->save();
+
+        $antrian = new Antrian;
+        $antrian->head = null;
+        $antrian->tail = null;
+        $antrian->dokter_id = $new->id;
+        $antrian->save();
+
+        return response()->json(['success'=>true]);
+    }
 
     public function add (Request $request){
         $antrian = Antrian::where('dokter_id', $request->dokter_id)->first();

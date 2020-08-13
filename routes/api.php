@@ -18,3 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/antrianPasien', 'AntrianController@add');
+
+Route::post('/dataDokter', 'AntrianController@addDokter');

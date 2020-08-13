@@ -74,11 +74,19 @@
                   <h5 style="color:#ffffff">Pasien Saat Ini</h5>
             </div>
             
-            <div class="card3">
+            @if($antrian == null)
+              <div class="card3">
+                <h5>
+                  -
+                </h5>
+              </div>
+            @else
+              <div class="card3">
                   <h5>
                   {{ $antrian->head ==  null ? '-' :  $antrian->heads->nomor_periksa}}
                   </h5>
-            </div>
+              </div>
+            @endif
             <br/>
 
             <div class="card2">
@@ -95,7 +103,7 @@
                   <h5 style="color:#ffffff">Pasien Menunggu</h5>
             </div>
             
-            @if($antrian->head == null)
+            @if($antrian == null)
               <div class="card4">
                 <h5>
                   -
