@@ -1,9 +1,9 @@
 @extends('auth/base')
 @section('content')
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('/template/images/rsiy.jpg'); background-size: 100%;">
+		<div class="container-login100" >
 			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-image: url('/template/images/rs-islam-logo.png'); background-size: auto;">
+				<div class="login100-form-title" style="background-color: #00923F; background-size: auto;">
 					<span class="login100-form-title-1">
 						Masuk
 					</span>

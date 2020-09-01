@@ -4,9 +4,9 @@
 	<div class="row align-items-center">
 		
 		<div class="col-6 col-xl-2">
-		<h1 class="mb-0 site-logo"><a href="index.html" class="text-black mb-0">
-			<img class="navbar-brand-full" src="{{('/template/images/rs-islam-logo.png')}}" width="150" height="40" alt="rsiy logo" href="/awal">
-		</a></h1>
+		<h5 class="mb-0 site-logo"><a href="/websignage" class="text-black mb-0">
+              ANTRIAN RUMAH SAKIT
+        </a></h5>
 		</div>
 		<div class="col-12 col-md-10 d-none d-xl-block">
 		<nav class="site-navigation position-relative text-right" role="navigation">

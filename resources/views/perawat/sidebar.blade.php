@@ -2,7 +2,8 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <span class="brand-text font-weight-light">
-        <img class="navbar-brand-full" src="{{('/template/images/rs-islam-logo.png')}}" width="150" height="40" alt="rsiy logo" href="/awal" style="display:block; margin-left:auto; margin-right:auto;">
+        <h5 style="text-align:center; color:#ffffff;">ANTRIAN</h5>
+        <h5 style="text-align:center; color:#ffffff;">RUMAH SAKIT</h5>
       </span>
     </a>
 

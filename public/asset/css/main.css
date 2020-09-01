@@ -44,7 +44,7 @@ body, html {
 /*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1.7;
 	color: #666666;
 	margin: 0px;
@@ -230,7 +230,6 @@ iframe {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(54,84,99,0.7);
 }
 
 
@@ -402,7 +401,7 @@ input.input100 {
   padding: 0 20px;
   min-width: 160px;
   height: 50px;
-  background-color: #57b846;
+  background-color: #00923F;
   border-radius: 25px;
 
   font-family: Poppins-Regular;

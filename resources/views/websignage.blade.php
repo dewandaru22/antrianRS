@@ -35,10 +35,10 @@
       <div class="container">
         <div class="row align-items-center">
           
-          <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="/awal" class="text-black mb-0">
-              <img class="navbar-brand-full" src="{{asset ('/template/images/rs-islam-logo.png')}}" width="150" height="40" alt="rsiy logo" href="/websignage">
-            </a></h1>
+          <div class="col-6 col-xl-3">
+            <h5 class="mb-0 site-logo" style="margin-top:6px;"><a href="/websignage" class="text-black mb-0">
+              ANTRIAN RUMAH SAKIT
+            </a></h5>
           </div>
           
           <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span class="icon-menu h3"></span></a></div>
@@ -50,13 +50,13 @@
   
   <div class="site-wrap">
 
-    <div class="site-blocks-cover overlay" style="background-image: url('{{ asset('/template/images/rsiy.jpg')}}'); " data-aos="fade" data-stellar-background-ratio="0.5">
+    <div class="site-blocks-cover overlay" style="background-image: url('{{ asset('/template/images/bg_2.jpg')}}'); " data-aos="fade" data-stellar-background-ratio="0.5">
       <div class="container">
         <div class="row align-items-center justify-content-center">
 
           <div class="main">
             <div class="card7">
-                  <h5 style="color:#ffffff">ANTRIAN RSIY PDHI YOGYAKARTA</h5>
+                  <h5 style="color:#ffffff"></h5>
             </div>
             <br/>
             <div class="card2">
@@ -69,6 +69,8 @@
                 </select>
               </label>
             </div>
+
+            <br/>
 
             <div class="card2">
                   <h5 style="color:#ffffff">Pasien Saat Ini</h5>
